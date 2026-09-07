@@ -233,6 +233,10 @@ const Cart = {
 
     this.render();
 
+    if (typeof App !== 'undefined') {
+      App.refreshProductCard(product.id);
+    }
+
     this.open();
 
     console.log(
@@ -294,6 +298,10 @@ const Cart = {
     this.save();
 
     this.render();
+
+    if (typeof App !== 'undefined') {
+      App.refreshProductCard(productId);
+    }
   },
 
 
@@ -339,6 +347,10 @@ const Cart = {
     this.save();
 
     this.render();
+
+    if (typeof App !== 'undefined') {
+      App.refreshProductCard(productId);
+    }
   },
 
 
@@ -358,6 +370,10 @@ const Cart = {
     this.save();
 
     this.render();
+
+    if (typeof App !== 'undefined') {
+      App.refreshProductCard(productId);
+    }
   },
 
 
