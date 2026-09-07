@@ -273,14 +273,17 @@ renderProducts(products = this.products) {
         data-product-id="${this.escape(product.id)}"
       >
 
-        <!-- صورة المنتج -->
-        <div class="product-image-wrapper">
+        <div class="product-image-box">
+
+          <span class="product-sku product-sku-top">
+            id: ${this.escape(product.sku || product.id || '-')}
+          </span>
 
           ${
             isOffer
               ? `
                 <span class="product-badge">
-                  خصم ${discount}%
+                  -${discount}%
                 </span>
               `
               : ''
@@ -289,9 +292,17 @@ renderProducts(products = this.products) {
           <button
             type="button"
             class="favorite-btn"
-            aria-label="إضافة للمفضلة"
+            aria-label="إضافة المنتج للمفضلة"
           >
             ♡
+          </button>
+
+          <button
+            type="button"
+            class="compare-btn"
+            aria-label="مقارنة المنتج"
+          >
+            ⚖
           </button>
 
           ${
@@ -314,19 +325,15 @@ renderProducts(products = this.products) {
         </div>
 
 
-        <!-- بيانات المنتج -->
-        <div class="product-info">
-
-          <div class="product-category">
-            ${this.escape(product.category || '')}
-          </div>
+        <div class="product-card-body">
 
           <h3 class="product-name">
             ${this.escape(product.name || 'منتج')}
           </h3>
 
-          <div class="product-sku">
-            SKU: ${this.escape(product.sku || '-')}
+          <div class="product-rating" aria-label="تقييم 5 من 5">
+            <span class="rating-stars">★★★★★</span>
+            <span class="rating-count">${this.escape(product.reviews_count || 0)}</span>
           </div>
 
 
@@ -351,7 +358,6 @@ renderProducts(products = this.products) {
           </div>
 
 
-          <!-- المخزون -->
           <div
             class="product-stock ${
               stock > 0
@@ -367,20 +373,17 @@ renderProducts(products = this.products) {
           </div>
 
 
-          <!-- إضافة للسلة -->
-          <button
-            type="button"
-            class="add-cart-btn"
-            data-add-to-cart="${this.escape(product.id)}"
-            ${stock <= 0 ? 'disabled' : ''}
-          >
-            🛒
-            ${
-              stock > 0
-                ? 'أضف للسلة'
-                : 'غير متوفر'
-            }
-          </button>
+          <div class="product-card-actions">
+            <button
+              type="button"
+              class="add-cart-btn"
+              data-add-to-cart="${this.escape(product.id)}"
+              aria-label="إضافة ${this.escape(product.name || 'المنتج')} للسلة"
+              ${stock <= 0 ? 'disabled' : ''}
+            >
+              🛒
+            </button>
+          </div>
 
         </div>
 
